@@ -6,4 +6,7 @@ export default class ProductController{
         console.log(products);
         res.render('index',{products});
     }
+    getAddForm(req,res){
+        return res.render('new-product')
+    }
 }

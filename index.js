@@ -12,6 +12,7 @@ server.use(ejsLayouts);
 
 const productController=new ProductController();
 server.get('/',productController.getProducts);
+server.get('/new',productController.getAddForm);
 server.use(express.static('src/views'));
 
 server.listen(3400);
