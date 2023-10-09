@@ -4,6 +4,8 @@ import path from "path";
 import ProductController from './src/controllers/product.controller.js';
 const server=express();
 
+// parse form data
+server.use(express.urlencoded({extended: true}));
 
 server.set('view engine','ejs');
 server.set("views",path.join(path.resolve(),"src","views"));
@@ -13,6 +15,7 @@ server.use(ejsLayouts);
 const productController=new ProductController();
 server.get('/',productController.getProducts);
 server.get('/new',productController.getAddForm);
+server.post('/', productController.addnewProduct);
 server.use(express.static('src/views'));
 
 server.listen(3400);
