@@ -1,10 +1,10 @@
 export default class ProductModel{
-    constructor(id,name,desc,price,imageurl){
-        this.id=Id;
+    constructor(id,name,desc,price,imageUrl){
+        this.id=id;
         this.name=name;
         this.desc=desc;
         this.price=price;
-        this.imageurl=imageurl;
+        this.imageUrl=imageUrl;
     }
     static get(){
         return products;
