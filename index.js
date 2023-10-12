@@ -1,21 +1,29 @@
 import express from 'express';
+import ProductsController from './src/controllers/product.controller.js';
 import ejsLayouts from 'express-ejs-layouts';
-import path from "path";
-import ProductController from './src/controllers/product.controller.js';
-const server=express();
+import path from 'path';
+import validationMiddleware from './src/middlewares/validation.middleware.js';
 
-// parse form data
-server.use(express.urlencoded({extended: true}));
+const app = express();
+const productsController =
+  new ProductsController();
 
-server.set('view engine','ejs');
-server.set("views",path.join(path.resolve(),"src","views"));
+app.use(ejsLayouts);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+app.set(
+  'views',
+  path.join(path.resolve(), 'src', 'views')
+);
 
-server.use(ejsLayouts);
+app.get('/', productsController.getProducts);
+app.get(
+  '/add-product',
+  productsController.getAddProduct
+);
+app.post('/', validationMiddleware, productsController.postAddProduct);
 
-const productController=new ProductController();
-server.get('/',productController.getProducts);
-server.get('/new',productController.getAddForm);
-server.post('/', productController.addnewProduct);
-server.use(express.static('src/views'));
-
-server.listen(3400);
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
