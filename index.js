@@ -4,13 +4,13 @@ import ejsLayouts from 'express-ejs-layouts';
 import path from 'path';
 import validationMiddleware from './src/middlewares/validation.middleware.js';
 import { uploadFile } from './src/middlewares/file-upload.middleware.js';
-
+import UserController from './src/controllers/user.controller.js';
 const app = express();
 
 app.use(express.static('public'));
 
-const productsController =
-  new ProductsController();
+const productsController =new ProductsController();
+const usersController =new UserController();
 
 app.use(ejsLayouts);
 app.use(express.json());
@@ -31,6 +31,8 @@ app.get(
   '/update-product/:id',
   productsController.getUpdateProductView
 );
+
+app.get('/register',usersController.getRegister);
 
 app.post(
   '/delete-product/:id',
