@@ -49,6 +49,8 @@ app.post('/register',usersController.postRegister);
 app.get('/login',usersController.getLogin);
 app.post('/login',usersController.postLogin);
 
+app.get('/logout',usersController.logout);
+
 app.post(
   '/delete-product/:id',
   auth,
