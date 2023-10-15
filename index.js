@@ -33,6 +33,10 @@ app.get(
 );
 
 app.get('/register',usersController.getRegister);
+app.post('/register',usersController.postRegister);
+
+app.get('/login',usersController.getLogin);
+app.post('/login',usersController.postLogin);
 
 app.post(
   '/delete-product/:id',
